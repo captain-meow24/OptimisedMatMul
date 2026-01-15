@@ -5,7 +5,7 @@
 #include <xmmintrin.h>
 #include <immintrin.h>
 
-void Optimised::cache_miss(std::vector<std::vector<int> > &a, std::vector<std::vector<int> > &b, std::vector<std::vector<int> > &c) {
+void Optimised::cache_miss(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c) {
     for (int i=0; i<100; i++) {
         for (int k=0; k<100; k++) {
             for (int j=0;j<100;j++) {
@@ -16,6 +16,8 @@ void Optimised::cache_miss(std::vector<std::vector<int> > &a, std::vector<std::v
 }
 
 
-void Optimised::SSE(std::vector<std::vector<int> > &a, std::vector<std::vector<int> > &b, std::vector<std::vector<int> > &c) {
-
+void Optimised::SSE(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c) {
+    for (int i=0; i<25;i++) {
+        
+    }
 }

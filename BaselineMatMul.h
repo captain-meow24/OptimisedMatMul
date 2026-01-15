@@ -8,8 +8,8 @@
 #include<iostream>
 #include <vector>
 
-class baseline {
-    baseline(std::vector<std::vector<int>> &a, std::vector<std::vector<int>> &b, std::vector<std::vector<int>> &c);
+class Baseline {
+    Baseline(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
 };
 
 
