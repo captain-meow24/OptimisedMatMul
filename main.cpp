@@ -14,6 +14,11 @@ int main() {
             l.push_back(2);
         }
         b.push_back(l);
+        std::vector<int> m;
+        for (int f=0; f<100; f++) {
+            m.push_back(0);
+        }
+        c.push_back(m);
     }
     return 0;
 }
