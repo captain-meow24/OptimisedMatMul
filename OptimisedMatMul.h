@@ -6,14 +6,14 @@
 #define OPTIMISEDMATMUL_H
 
 #include<iostream>
-#include<vector>
+
 
 class Optimised {
-    void cache_miss(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
-    void SSE(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
-    void AVX(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
+    void cache_miss(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]);
+    void SSE(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]);
+    void AVX(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]);
 
-    void transpose(float* B, float* BT, int N);
+    void transpose(float (&B)[100][100], float (&BT)[100][100], int N);
 };
 
 

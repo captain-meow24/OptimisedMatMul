@@ -5,7 +5,7 @@
 #include <xmmintrin.h>
 #include <immintrin.h>
 
-void Optimised::cache_miss(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c) {
+void Optimised::cache_miss(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]) {
     for (int i=0; i<100; i++) {
         for (int k=0; k<100; k++) {
             for (int j=0;j<100;j++) {
@@ -15,20 +15,19 @@ void Optimised::cache_miss(std::vector<std::vector<float>> &a, std::vector<std::
     }
 }
 
-void Optimised::transpose(float* B, float* BT, int N) {
+void Optimised::transpose(float (&B)[100][100], float (&BT)[100][100], int N) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            BT[j*N + i] = B[i*N + j];
+            BT[j][i] = B[i][j];
         }
     }
 }
 
 
-void Optimised::SSE(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c) {
+void Optimised::SSE(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]) {
     float* a1 = &a[0][0];
-    std::vector<std::vector<float>> bt;
-    bt.reserve(100*100);
-    transpose(&b, &bt, 100);
+    float bt[100][100]{};
+    transpose(b, bt, 100);
     float* b1 = &bt[0][0];
     for (int i=0; i<100; i++) {
         for (int j=0; j<100; j++) {
@@ -36,7 +35,9 @@ void Optimised::SSE(std::vector<std::vector<float>> &a, std::vector<std::vector<
                 __m128 va, vb, vc;
                 va= _mm_load_ps(a1);
                 va= _mm_load_ps(a1);
-                vc = _mm_mul_ps(va, vb);
+                vc = _mm_mul_ps(&va, vb);
+                c[i][j] += _mm_hadd_ps(vc,vc);
+                a1 = 100*1 + j*4;
             }
         }
     }

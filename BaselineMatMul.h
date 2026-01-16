@@ -6,10 +6,9 @@
 #define BASELINEMATMUL_H
 
 #include<iostream>
-#include <vector>
 
 class Baseline {
-    Baseline(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
+    Baseline(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]);
 };
 
 
