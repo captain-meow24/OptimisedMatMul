@@ -12,6 +12,8 @@ class Optimised {
     void cache_miss(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
     void SSE(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
     void AVX(std::vector<std::vector<float>> &a, std::vector<std::vector<float>> &b, std::vector<std::vector<float>> &c);
+
+    void transpose(float* B, float* BT, int N);
 };
 
 
