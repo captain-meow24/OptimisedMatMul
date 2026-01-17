@@ -25,20 +25,20 @@ void Optimised::transpose(float (&B)[100][100], float (&BT)[100][100], int N) {
 
 
 void Optimised::SSE(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]) {
-    float* a1 = &a[0][0];
-    float bt[100][100]{};
+    alignas(16) float bt[100][100]{};
+    alignas(16) float temp[4];
     transpose(b, bt, 100);
-    float* b1 = &bt[0][0];
     for (int i=0; i<100; i++) {
         for (int j=0; j<100; j++) {
-            for (int k=0; k<25; k++) {
-                __m128 va, vb, vc;
-                va= _mm_load_ps(a1);
-                va= _mm_load_ps(a1);
-                vc = _mm_mul_ps(&va, vb);
-                c[i][j] += _mm_hadd_ps(vc,vc);
-                a1 = 100*1 + j*4;
+            __m128 sum = _mm_setzero_ps();
+            for (int k=0; k<100; k+=4) {
+                __m128 va = _mm_load_ps(&a[i][k]);
+                __m128 vb= _mm_load_ps(&bt[j][k]);
+                sum = _mm_add_ps(sum, _mm_mul_ps(va, vb));
             }
+            _mm_store_ps(temp, sum);
+            c[i][j] = temp[0] + temp[1] + temp[2] + temp[3];
+
         }
     }
 }
