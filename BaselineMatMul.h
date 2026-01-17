@@ -8,7 +8,8 @@
 #include<iostream>
 
 class Baseline {
-    Baseline(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]);
+public:
+    Baseline(float (&a)[400][400],float (&b)[400] [400], float (&c)[400][400]);
 };
 
 

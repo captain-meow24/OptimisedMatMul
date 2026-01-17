@@ -5,17 +5,17 @@
 #include <xmmintrin.h>
 #include <immintrin.h>
 
-void Optimised::cache_miss(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]) {
-    for (int i=0; i<100; i++) {
-        for (int k=0; k<100; k++) {
-            for (int j=0;j<100;j++) {
+void Optimised::cache_miss(float (&a)[400][400],float (&b)[400] [400], float (&c)[400][400]) {
+    for (int i=0; i<400; i++) {
+        for (int k=0; k<400; k++) {
+            for (int j=0;j<400;j++) {
                 c[i][j] += a[i][k] * b[k][j];
             }
         }
     }
 }
 
-void Optimised::transpose(float (&B)[100][100], float (&BT)[100][100], int N) {
+void Optimised::transpose(float (&B)[400][400], float (&BT)[400][400], int N) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             BT[j][i] = B[i][j];
@@ -24,14 +24,14 @@ void Optimised::transpose(float (&B)[100][100], float (&BT)[100][100], int N) {
 }
 
 
-void Optimised::SSE(float (&a)[100][100],float (&b)[100] [100], float (&c)[100][100]) {
-    alignas(16) float bt[100][100]{};
+void Optimised::SSE(float (&a)[400][400],float (&b)[400] [400], float (&c)[400][400]) {
+    alignas(16) float bt[400][400]{};
     alignas(16) float temp[4];
-    transpose(b, bt, 100);
-    for (int i=0; i<100; i++) {
-        for (int j=0; j<100; j++) {
+    transpose(b, bt, 400);
+    for (int i=0; i<400; i++) {
+        for (int j=0; j<400; j++) {
             __m128 sum = _mm_setzero_ps();
-            for (int k=0; k<100; k+=4) {
+            for (int k=0; k<400; k+=4) {
                 __m128 va = _mm_load_ps(&a[i][k]);
                 __m128 vb= _mm_load_ps(&bt[j][k]);
                 sum = _mm_add_ps(sum, _mm_mul_ps(va, vb));
