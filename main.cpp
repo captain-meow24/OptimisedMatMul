@@ -21,27 +21,27 @@ int main() {
     Baseline(a,b,c);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Time taken for normal matrix multiplication- " << duration.count() << std::endl;
+    std::cout << "Time taken for normal matrix multiplication - " << duration.count() << std::endl;
 
     Optimised* o= new Optimised();
     auto start1 = std::chrono::high_resolution_clock::now();
     o->cache_miss(a,b,c);
     auto end1 = std::chrono::high_resolution_clock::now();
     auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1);
-    std::cout << "Time taken when minimizing cache misses- " << duration1.count()<< std::endl;
+    std::cout << "Time taken when minimizing cache misses - " << duration1.count()<< std::endl;
 
 
     auto start2 = std::chrono::high_resolution_clock::now();
     o->SSE(a,b,c);
     auto end2 = std::chrono::high_resolution_clock::now();
     auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
-    std::cout << "Time taken by using SSE registers- " << duration2.count() << std::endl;
+    std::cout << "Time taken by using SSE registers - " << duration2.count() << std::endl;
 
     auto start3 = std::chrono::high_resolution_clock::now();
     o->AVX(a,b,c);
     auto end3 = std::chrono::high_resolution_clock::now();
     auto duration3 = std::chrono::duration_cast<std::chrono::milliseconds>(end3 - start3);
-    std::cout << "Time taken by using AVX registers-  " << duration3.count() << std::endl;
+    std::cout << "Time taken by using AVX registers -  " << duration3.count() << std::endl;
 
 
     return 0;
