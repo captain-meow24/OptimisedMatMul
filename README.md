@@ -2,7 +2,7 @@
 
 This project optimizes matrix multiplication in 3 different ways -
 
-## 1. By changing how matrix b (of a*b) is accessed -
+## 1. By reducing cache misses -
 Traditionally, the elements of matrix B are accessed sequentially in a column but if we access it row-wise and keep the formula the same (C[i][j] += A[i][k] * B[k][i], we can access the memory sequentially and hence reduce cache misses.
 ## 2. By using SSE vector instructions -
 They are 128 bits wide registers that can store upto 4 floats at a time and perform the same operation on them at the same time.
